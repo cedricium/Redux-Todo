@@ -14,6 +14,10 @@ function App(props) {
     setTodo('')
   }
 
+  const handleClickTodo = index => {
+    props.toggleTodo(index)
+  }
+
   return (
     <div className="App">
       <h2>Get Sh*t Done</h2>
@@ -30,7 +34,13 @@ function App(props) {
       </form>
       <div>
         {props.todos.map((todo, index) => (
-          <p key={index}>{todo.value}</p>
+          <p
+            key={index}
+            style={todo.completed ? { textDecoration: 'line-through'} : null }
+            onClick={() => handleClickTodo(index)}
+          >
+            {todo.value}
+          </p>
         ))}
       </div>
     </div>
