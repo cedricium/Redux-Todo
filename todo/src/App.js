@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addTodo, toggleTodo } from './actions'
+import { addTodo } from './actions'
+import TodosContainer from './components/TodosContainer'
 
 function App(props) {
   const [todo, setTodo] = useState('')
@@ -12,10 +13,6 @@ function App(props) {
       completed: false,
     })
     setTodo('')
-  }
-
-  const handleClickTodo = index => {
-    props.toggleTodo(index)
   }
 
   return (
@@ -32,25 +29,9 @@ function App(props) {
           value="Add Todo"
         />
       </form>
-      <div>
-        {props.todos.map((todo, index) => (
-          <p
-            key={index}
-            style={todo.completed ? { textDecoration: 'line-through'} : null }
-            onClick={() => handleClickTodo(index)}
-          >
-            {todo.value}
-          </p>
-        ))}
-      </div>
+      <TodosContainer />
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state.todos,
-  }
-}
-
-export default connect(mapStateToProps, { addTodo, toggleTodo, })(App)
+export default connect(null, { addTodo })(App)
