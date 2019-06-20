@@ -4,13 +4,13 @@ export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const addTodo = (todo) => {
   return {
     type: ADD_TODO,
-    todo,
+    payload: todo,
   }
 }
 
 export const toggleTodo = (index) => {
   return {
     type: TOGGLE_TODO,
-    index,
+    payload: index,
   }
 }
