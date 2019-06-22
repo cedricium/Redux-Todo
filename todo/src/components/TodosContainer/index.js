@@ -2,19 +2,26 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { toggleTodo } from '../../actions'
 
+import {
+  TodoListWrapper,
+  TodoWrapper,
+  TodoValue,
+  TodoCheckbox
+} from './styled'
+
 const Todo = props => {
   const { id, todo, handleClickTodo } = props
   return (
-    <div>
-      <label>
-        <input
-          type="checkbox"
-          value={todo.value}
-          onChange={() => handleClickTodo(id)} 
-        />
-        {todo.value}
-      </label>
-    </div>
+    <TodoWrapper>
+      <TodoCheckbox
+        name={id}
+        type="checkbox"
+        value={todo.value}
+        checked={todo.completed}
+        onChange={() => handleClickTodo(id)}
+      />
+      <TodoValue htmlFor={id}>{todo.value}</TodoValue>
+    </TodoWrapper>
   )
 }
 
@@ -24,7 +31,7 @@ const TodosContainer = props => {
   }
 
   return (
-    <div>
+    <TodoListWrapper>
       {props.todos.map((todo, index) => (
         <Todo
           key={index} 
@@ -33,7 +40,7 @@ const TodosContainer = props => {
           handleClickTodo={handleClickTodo}
         />
       ))}
-    </div>
+    </TodoListWrapper>
   )
 }
 
